@@ -1,0 +1,6 @@
+#!/bin/sh
+# $Id: mk.build,v 1.1 2014-03-24 18:39:21-07 - - $
+PATH=$PATH:/afs/cats.ucsc.edu/courses/cmps012b-wm/bin
+checksource README Makefile *.java >check.log 2>&1
+gmake >gmake.log 2>&1
+more check.log gmake.log

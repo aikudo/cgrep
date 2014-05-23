@@ -1,0 +1,25 @@
+#!/bin/bash
+# $Id: mk.test,v 1.2 2014-04-15 16:04:25-07 - - $
+PATH=$PATH:/afs/cats.ucsc.edu/courses/cmps012b-wm/bin
+export PATH
+PROG=jgrep
+
+function runtest {
+   test=$1
+   shift
+   echo $0: Running $PROG "$@"
+   $PROG "$@" >test.$test.out 2>test.$test.err
+   echo status = $? >test.$test.status
+   ls -goa test.$test.*
+}
+
+runtest 0 
+runtest 1  foobar <simple-0.data
+runtest 2  foobar *.data
+runtest 3  'foot|imag|ocean' *.data /dev/null
+runtest 4  -i FOOBAR *.data
+runtest 5  -l /no/such/file ' ' *.data
+runtest 6  -n foobar *.data
+runtest 7  -v foobar simple-0.data
+runtest 8  -vin FOOBAR *.data
+runtest 9  -vin FOOBAR *.data /.bashrc
